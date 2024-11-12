@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversion Program</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* Basic Reset */
         * {
@@ -19,7 +19,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Orbitron', sans-serif; /* Cyberpunk font */
+            font-family: 'Roboto Mono', monospace; /* Changed font to Roboto Mono */
             background: rgba(0, 0, 0, 0.8);
             overflow: hidden;
         }
@@ -34,6 +34,20 @@
             background-size: cover;
             filter: blur(5px);
             z-index: -1;
+            animation: camera-move 30s infinite linear; /* Camera movement */
+        }
+
+        /* Camera Movement Effect */
+        @keyframes camera-move {
+            0% {
+                transform: translate(0px, 0px);
+            }
+            50% {
+                transform: translate(5px, 5px); /* Slight movement to simulate camera shake */
+            }
+            100% {
+                transform: translate(0px, 0px);
+            }
         }
 
         /* Particle Effect */
@@ -261,47 +275,13 @@
                             "opacity": 1
                         }
                     },
-                    "bubble": {
-                        "distance": 400,
-                        "size": 40,
-                        "duration": 2,
-                        "opacity": 8,
-                        "speed": 3
-                    },
                     "repulse": {
-                        "distance": 200,
-                        "duration": 0.4
-                    },
-                    "push": {
-                        "particles_nb": 4
-                    },
-                    "remove": {
-                        "particles_nb": 2
+                        "distance": 100,
+                        "duration": 1
                     }
                 }
             },
             "retina_detect": true
-        });
-
-        // Conversion logic
-        document.getElementById('conversion-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            let inputValue = parseFloat(document.getElementById('input-value').value);
-            let conversionType = document.getElementById('conversion-type').value;
-            let result = '';
-
-            if (conversionType === 'c-to-f') {
-                result = `${inputValue}°C is ${(inputValue * 9/5) + 32}°F`;
-            } else if (conversionType === 'f-to-c') {
-                result = `${inputValue}°F is ${(inputValue - 32) * 5/9}°C`;
-            } else if (conversionType === 'm-to-ft') {
-                result = `${inputValue} meters is ${(inputValue * 3.28084).toFixed(2)} feet`;
-            } else if (conversionType === 'ft-to-m') {
-                result = `${inputValue} feet is ${(inputValue / 3.28084).toFixed(2)} meters`;
-            }
-
-            document.getElementById('result').innerText = result;
         });
     </script>
 </body>
