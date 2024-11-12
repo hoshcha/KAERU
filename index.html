@@ -132,7 +132,7 @@
 
     <!-- Main content -->
     <div class="content">
-        <h1 class="neon-text">Cyberpunk Conversion Program</h1>
+        <h1 class="neon-text">Conversion Program</h1>
         <h2 class="neon-text">Celsius to Fahrenheit, Fahrenheit to Celsius, Meters to Feet, Feet to Meters</h2>
         
         <!-- Conversion Form -->
@@ -158,11 +158,11 @@
     <!-- Particle.js library -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js for sakura leaf falling effect
+        // Initialize particles.js with sakura leaf effect (falling leaves)
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 80,
+                    "value": 100,
                     "density": {
                         "enable": true,
                         "value_area": 800
@@ -275,7 +275,8 @@
                 result = `${inputValue} feet is ${(inputValue / 3.28084).toFixed(2)} meters`;
             }
 
-            document.getElementById('result').innerText = result;
+            // Display the result
+            document.getElementById('result').innerHTML = `<p class="neon-text">${result}</p>`;
         });
     </script>
 </body>
