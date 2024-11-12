@@ -4,285 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conversion Program</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
     <style>
-        /* Basic Reset */
+        /* Overall page and theme styling */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            overflow: hidden;
         }
-
-        /* Body and Background with the GIF */
-        body, html {
+        body {
+            font-family: 'Orbitron', sans-serif;
+            color: #00ffcc;
+            background-color: #000;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-family: 'Roboto Mono', monospace; /* Changed font to Roboto Mono */
-            background: rgba(0, 0, 0, 0.8);
-            overflow: hidden;
         }
 
-        #background {
+        /* Background and particle container */
+        .background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://giffiles.alphacoders.com/211/211931.gif') no-repeat center center fixed;
+            background: url("https://miro.medium.com/max/6300/1*-diM6DMK5qvR5AOvqXRqqQ.jpeg") no-repeat center center fixed;
             background-size: cover;
-            filter: blur(5px);
-            z-index: -1;
-            animation: camera-move 30s infinite linear; /* Camera movement */
+            transform: translateZ(0);
+            animation: moveBackground 20s infinite alternate ease-in-out;
         }
 
-        /* Camera Movement Effect */
-        @keyframes camera-move {
-            0% {
-                transform: translate(0px, 0px);
-            }
-            50% {
-                transform: translate(5px, 5px); /* Slight movement to simulate camera shake */
-            }
-            100% {
-                transform: translate(0px, 0px);
-            }
+        /* Animation for background movement */
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0) scale(1.1); }
+            50% { transform: translate(10px, -10px) scale(1.1); }
+            100% { transform: translate(-10px, 10px) scale(1.1); }
         }
 
-        /* Particle Effect */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+        /* Particle styling */
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: #ff00ff;
+            border-radius: 50%;
+            animation: moveParticle 15s linear infinite;
+            transition: transform 0.3s;
         }
 
-        /* Container for the form and text */
-        .content {
+        /* Particle movement */
+        @keyframes moveParticle {
+            0% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20vh) translateX(5vw); }
+            50% { transform: translateY(-40vh) translateX(-5vw); opacity: 0.5; }
+            75% { transform: translateY(-60vh) translateX(10vw); }
+            100% { transform: translateY(0) translateX(-10vw); opacity: 1; }
+        }
+
+        /* Container for content */
+        .container {
             position: relative;
-            z-index: 1;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
             text-align: center;
-            max-width: 800px;
-            padding: 40px;
-            background: rgba(20, 20, 20, 0.9);
-            border-radius: 15px;
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
-            font-size: 1.5rem;
-            border: 2px solid #ff00ff;
+            box-shadow: 0 0 15px #00ffcc;
+            z-index: 1;
         }
 
         h1 {
-            color: #ff00ff;
-            font-size: 3.5rem; /* Larger size */
-            margin-bottom: 30px;
-            text-shadow: 0 0 8px #ff00ff, 0 0 16px #ff00ff; /* Reduced neon effect */
+            color: #ffffff;
+            text-shadow: 0 0 5px #00ffcc;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-
-        h2 {
-            color: #00bfae;
-            font-size: 2rem; /* Larger size */
-            margin-bottom: 40px;
-            text-shadow: 0 0 10px #00bfae, 0 0 20px #00bfae, 0 0 30px #00bfae;
+        label, button, select {
+            font-size: 18px;
+            margin: 10px 0;
         }
-
-        input, button {
-            font-size: 1.3rem;
-            padding: 18px;
-            margin: 18px 0;
-            border-radius: 10px;
-            border: 2px solid #ff00ff;
-            background-color: #222;
-            color: #fff;
+        input[type="number"] {
             width: 100%;
-            transition: all 0.3s ease;
-        }
-
-        input:focus, button:focus {
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
             outline: none;
-            border-color: #00bfae;
+            font-size: 16px;
+            background-color: #222;
+            color: #00ffcc;
+            border-bottom: 2px solid #00ffcc;
         }
-
         button {
+            background-color: #00ffcc;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
             cursor: pointer;
-            background-color: #00bfae;
-            transition: background-color 0.3s ease;
+            border-radius: 5px;
+            transition: 0.3s;
         }
-
         button:hover {
             background-color: #ff00ff;
-        }
-
-        /* Cyberpunk neon effect on text */
-        .neon-text {
-            color: #ff00ff;
-            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
-        }
-
-        /* Back Button */
-        .back-btn {
-            background-color: #222;
-            color: #ff00ff;
-            padding: 15px;
-            border: 2px solid #ff00ff;
-            border-radius: 10px;
-            font-size: 1.3rem;
-            cursor: pointer;
-            width: auto;
-            margin-top: 20px;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background-color: #00bfae;
             color: #fff;
-            border-color: #00bfae;
+        }
+        .output {
+            font-family: Arial, sans-serif;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ffffff;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            background-color: #222;
+            color: #00ffcc;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-bottom: 2px solid #00ffcc;
+            margin-top: 10px;
         }
 
-        /* Responsive styling */
-        @media (max-width: 768px) {
-            .content {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
+        /* Particle hover effect */
+        .particle:hover {
+            transform: scale(2);
+            background-color: #00ffcc;
         }
-
     </style>
 </head>
 <body>
-    <!-- Background and particle layers -->
-    <div id="background"></div>
-    <div id="particles-js"></div>
+    <!-- Background with particles -->
+    <div class="background"></div>
+    <div id="particles"></div>
 
-    <!-- Main content -->
-    <div class="content">
-        <h1 class="neon-text">Conversion Program</h1>
-        <h2 class="neon-text">Celsius to Fahrenheit, Fahrenheit to Celsius, Meters to Feet, Feet to Meters</h2>
+    <!-- Conversion container -->
+    <div class="container">
+        <h1>Conversion Program</h1>
         
-        <!-- Conversion Form -->
-        <form id="conversion-form">
-            <label for="input-value">Enter value:</label>
-            <input type="number" id="input-value" placeholder="Enter a number" required>
-            
-            <label for="conversion-type">Choose conversion type:</label>
-            <select id="conversion-type" required>
-                <option value="c-to-f">Celsius to Fahrenheit</option>
-                <option value="f-to-c">Fahrenheit to Celsius</option>
-                <option value="m-to-ft">Meters to Feet</option>
-                <option value="ft-to-m">Feet to Meters</option>
+        <!-- Unified Conversion Interface -->
+        <div>
+            <label for="valueInput">Enter Value:</label>
+            <input type="number" id="valueInput" placeholder="Enter value">
+            <select id="conversionType">
+                <option value="cToF">Celsius to Fahrenheit</option>
+                <option value="fToC">Fahrenheit to Celsius</option>
+                <option value="mToF">Meters to Feet</option>
+                <option value="fToM">Feet to Meters</option>
             </select>
-            
-            <button type="submit">Convert</button>
-        </form>
-
-        <!-- Result -->
-        <div id="result"></div>
-
-        <!-- Back Button -->
-        <a href="https://hoshcha.github.io/TACTICA/" class="back-btn">Back to TACTICA</a>
+            <button onclick="convert()">Convert</button>
+            <div id="output" class="output"></div>
+        </div>
     </div>
 
-    <!-- Particle.js library -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // Initialize particles.js with sakura leaf effect (falling leaves)
-        particlesJS("particles-js", {
-            "particles": {
-                "number": {
-                    "value": 100,
-                    "density": {
-                        "enable": true,
-                        "value_area": 800
-                    }
-                },
-                "color": {
-                    "value": "#ff4081" // Light pink color for sakura leaves
-                },
-                "shape": {
-                    "type": "image", // Use images as particles
-                    "image": {
-                        "src": "https://cdn.pixabay.com/photo/2017/02/15/11/46/heart-2063494_960_720.png", // Sakura leaf shape (using heart for simplicity)
-                        "width": 25,
-                        "height": 25
-                    }
-                },
-                "opacity": {
-                    "value": 0.7,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 1,
-                        "opacity_min": 0.3,
-                        "sync": false
-                    }
-                },
-                "size": {
-                    "value": 10,
-                    "random": true,
-                    "anim": {
-                        "enable": true,
-                        "speed": 2,
-                        "size_min": 5,
-                        "sync": false
-                    }
-                },
-                "line_linked": {
-                    "enable": false, // No lines between particles
-                },
-                "move": {
-                    "enable": true,
-                    "speed": 1,
-                    "direction": "bottom",
-                    "random": true,
-                    "straight": false,
-                    "out_mode": "out",
-                    "bounce": false,
-                    "attract": {
-                        "enable": false
-                    }
+        // Function for Unified Conversion
+        function convert() {
+            const value = parseFloat(document.getElementById("valueInput").value);
+            const conversionType = document.getElementById("conversionType").value;
+            let output = "";
+
+            if (!isNaN(value)) {
+                switch (conversionType) {
+                    case "cToF":
+                        output = `${value} °C = ${(value * 9/5 + 32).toFixed(2)} °F`;
+                        break;
+                    case "fToC":
+                        output = `${value} °F = ${((value - 32) * 5/9).toFixed(2)} °C`;
+                        break;
+                    case "mToF":
+                        output = `${value} meters = ${(value * 3.28084).toFixed(2)} feet`;
+                        break;
+                    case "fToM":
+                        output = `${value} feet = ${(value / 3.28084).toFixed(2)} meters`;
+                        break;
                 }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": {
-                    "onhover": {
-                        "enable": true,
-                        "mode": "repulse"
-                    },
-                    "onclick": {
-                        "enable": true,
-                        "mode": "push"
-                    },
-                    "resize": true
-                },
-                "modes": {
-                    "grab": {
-                        "distance": 400,
-                        "line_linked": {
-                            "opacity": 1
-                        }
-                    },
-                    "repulse": {
-                        "distance": 100,
-                        "duration": 1
-                    }
-                }
-            },
-            "retina_detect": true
-        });
+            } else {
+                output = "Please enter a valid number.";
+            }
+            document.getElementById("output").innerHTML = output;
+        }
+
+        // Function to create particle effect
+        function createParticles() {
+            const particleContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDuration = 5 + Math.random() * 10 + 's';
+                particleContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on page load
+        createParticles();
     </script>
 </body>
 </html>
