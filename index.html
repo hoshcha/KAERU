@@ -108,6 +108,29 @@
             text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff, 0 0 40px #ff00ff;
         }
 
+        /* Back Button */
+        .back-btn {
+            background-color: #222;
+            color: #ff00ff;
+            padding: 15px;
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            width: auto;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background-color: #00bfae;
+            color: #fff;
+            border-color: #00bfae;
+        }
+
         /* Responsive styling */
         @media (max-width: 768px) {
             .content {
@@ -153,6 +176,9 @@
 
         <!-- Result -->
         <div id="result"></div>
+
+        <!-- Back Button -->
+        <a href="https://hoshcha.github.io/TACTICA/" class="back-btn">Back to TACTICA</a>
     </div>
 
     <!-- Particle.js library -->
@@ -275,8 +301,7 @@
                 result = `${inputValue} feet is ${(inputValue / 3.28084).toFixed(2)} meters`;
             }
 
-            // Display the result
-            document.getElementById('result').innerHTML = `<p class="neon-text">${result}</p>`;
+            document.getElementById('result').innerText = result;
         });
     </script>
 </body>
