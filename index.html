@@ -23,6 +23,27 @@
             align-items: center;
         }
 
+        /* Back button styling */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 10px 15px;
+            background-color: #ff00ff;
+            color: #ffffff;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+            box-shadow: 0 0 10px #00ffcc;
+            transition: background-color 0.3s ease;
+            z-index: 10;
+        }
+
+        .back-button:hover {
+            background-color: #00ffcc;
+            color: #000;
+        }
+
         /* Background and particle container */
         .background {
             position: fixed;
@@ -76,7 +97,7 @@
         }
 
         h1 {
-            color: #ffffff;
+            color: #ff00ff;
             text-shadow: 0 0 5px #00ffcc;
             font-size: 2em;
             margin-bottom: 20px;
@@ -136,6 +157,9 @@
     </style>
 </head>
 <body>
+    <!-- Back button -->
+    <a href="https://hoshcha.github.io/TACTICA/" class="back-button">Back</a>
+
     <!-- Background with particles -->
     <div class="background"></div>
     <div id="particles"></div>
