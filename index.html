@@ -65,17 +65,6 @@
             100% { transform: translate(-10px, 10px) scale(1.1); }
         }
 
-        /* Particle styling */
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: #ff00ff;
-            border-radius: 50%;
-            animation: moveParticle 15s linear infinite;
-            transition: transform 0.3s;
-        }
-
         /* Particle movement */
         @keyframes moveParticle {
             0% { transform: translateY(0) translateX(0); }
@@ -126,6 +115,7 @@
             cursor: pointer;
             border-radius: 5px;
             transition: 0.3s;
+            font-weight: bold;
         }
         button:hover {
             background-color: #ff00ff;
@@ -133,9 +123,9 @@
         }
         .output {
             font-family: Arial, sans-serif;
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 25px;
             margin-top: 20px;
+            text-shadow: 0 0 5px #00ffcc;
             color: #ffffff;
         }
         select {
@@ -149,12 +139,6 @@
             border-bottom: 2px solid #00ffcc;
             margin-top: 10px;
         }
-
-        /* Particle hover effect */
-        .particle:hover {
-            transform: scale(2);
-            background-color: #00ffcc;
-        }
     </style>
 </head>
 <body>
@@ -163,7 +147,6 @@
 
     <!-- Background with particles -->
     <div class="background"></div>
-    <div id="particles"></div>
 
     <!-- Conversion container -->
     <div class="container">
@@ -172,7 +155,7 @@
         <!-- Unified Conversion Interface -->
         <div>
             <label for="valueInput">Enter Value:</label>
-            <input type="number" id="valueInput" placeholder="Enter value">
+            <input type="number" id="valueInput" placeholder="ワウヾ⁠(˶⁠ ⁠’⁠Ｏ⁠’˶⁠ ⁠)⁠ﾉﾞ‎">
             <select id="conversionType">
                 <option value="cToF">Celsius to Fahrenheit</option>
                 <option value="fToC">Fahrenheit to Celsius</option>
@@ -207,26 +190,11 @@
                         break;
                 }
             } else {
-                output = "Please enter a valid number.";
+                output = "Invalid Value.";
             }
             document.getElementById("output").innerHTML = output;
         }
 
-        // Function to create particle effect
-        function createParticles() {
-            const particleContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.top = Math.random() * 100 + 'vh';
-                particle.style.left = Math.random() * 100 + 'vw';
-                particle.style.animationDuration = 5 + Math.random() * 10 + 's';
-                particleContainer.appendChild(particle);
-            }
-        }
-
-        // Initialize particles on page load
-        createParticles();
     </script>
 </body>
 </html>
